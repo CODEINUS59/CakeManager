@@ -11,7 +11,7 @@ import com.maskbor.cakemanager.model.StatusType;
  *
  * @author root
  */
-class CakeFilter {
+public class CakeFilter {
     int page=1, limit=5;
     String text=null;
     StatusType[] statuses={};

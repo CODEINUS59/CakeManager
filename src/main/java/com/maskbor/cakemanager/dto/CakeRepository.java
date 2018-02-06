@@ -19,5 +19,5 @@ interface CakeRepository {
     CompletableFuture<Void> addItem(Cake cake);
     CompletableFuture<Void> updateItem(Cake cake);
     CompletableFuture<Void> removeItem(Cake cake);
-    CompletableFuture<Long> getTotal(Cake cake);
+    CompletableFuture<Long> getTotal(CakeFilter filter);
 }

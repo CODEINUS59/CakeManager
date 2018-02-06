@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author root
  */
-public class CakeRepositoryImp implements CakeRepository{
-    public static final Logger logger = LoggerFactory.getLogger(CakeRepositoryImp.class);
+public class CakeDto implements CakeRepository{
+    public static final Logger logger = LoggerFactory.getLogger(CakeDto.class);
     
     private SessionFactory sessionFactory;
     
@@ -30,10 +30,17 @@ public class CakeRepositoryImp implements CakeRepository{
 
     @Override
     public CompletableFuture<List<Cake>> getRange(CakeFilter filter) {
-        Session session = sessionFactory.getCurrentSession();
-        return CompletableFuture.supplyAsync(
-                    (Supplier<List<Cake>>)
-                           (session.createQuery("").list()));
+        final Session session = sessionFactory.getCurrentSession();
+        Supplier<List<Cake>> s;
+        s = new Supplier<List<Cake>>() {
+            @Override
+            public List<Cake> get() {
+                String query = "from Cake where ";
+                //filter.limit
+                return session.createQuery(query).list();
+            }
+        };
+        return CompletableFuture.supplyAsync(s);
     }
   
     @Override
@@ -74,8 +81,19 @@ public class CakeRepositoryImp implements CakeRepository{
     }
 
     @Override
-    public CompletableFuture<Long> getTotal(Cake cake) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CompletableFuture<Long> getTotal(CakeFilter filter) {
+        final Session session = sessionFactory.getCurrentSession();
+        Supplier<Long> s;
+        s = new Supplier<Long>() {
+            @Override
+            public Long get() {
+                String query = "select count(id) from Cake where ";
+                //filter.limit
+//                Long total = session.createQuery(query).
+                return new Long(0);
+            }
+        };
+        return CompletableFuture.supplyAsync(s);
     }
 
 }
