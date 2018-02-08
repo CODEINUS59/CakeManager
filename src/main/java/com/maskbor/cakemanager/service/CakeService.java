@@ -5,8 +5,9 @@
  */
 package com.maskbor.cakemanager.service;
 
-import com.maskbor.cakemanager.dto.CakeDto;
-import com.maskbor.cakemanager.dto.CakeFilter;
+import com.maskbor.cakemanager.repository.CakeRepositoryImpl;
+import com.maskbor.cakemanager.repository.CakeFilter;
+import com.maskbor.cakemanager.repository.CakeRepository;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -15,10 +16,10 @@ import java.util.concurrent.CompletableFuture;
  * @author ran
  */
 public interface CakeService {
-    CompletableFuture<CakeDto> getItem(int id);
+    CompletableFuture<CakeRepository> getItem(int id);
 //    CompletableFuture<CakeView> getView(CakeFilter filter);
-    CompletableFuture<Void> saveItem(CakeDto cake);
-    CompletableFuture<Void> updateItem(CakeDto cake);
-    CompletableFuture<Void> removeItem(CakeDto cake);
+    CompletableFuture<Void> saveItem(CakeRepository cake);
+    CompletableFuture<Void> updateItem(CakeRepository cake);
+    CompletableFuture<Void> removeItem(CakeRepository cake);
     CompletableFuture<Long> getTotal(CakeFilter filter);
 }

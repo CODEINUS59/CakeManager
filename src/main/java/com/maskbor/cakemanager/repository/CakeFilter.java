@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.maskbor.cakemanager.dto;
+package com.maskbor.cakemanager.repository;
 
 import com.maskbor.cakemanager.model.StatusType;
 

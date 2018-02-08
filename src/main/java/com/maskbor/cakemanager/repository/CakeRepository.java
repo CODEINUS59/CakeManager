@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.maskbor.cakemanager.dto;
+package com.maskbor.cakemanager.repository;
 
 import com.maskbor.cakemanager.model.Cake;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
  *
  * @author root
  */
-interface CakeRepository {
+public interface CakeRepository {
     CompletableFuture<Cake> getItem(int id);
     CompletableFuture<List<Cake>> getRange(CakeFilter filter);
     CompletableFuture<Void> addItem(Cake cake);

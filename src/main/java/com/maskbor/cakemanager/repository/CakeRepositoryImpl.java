@@ -1,4 +1,4 @@
-package com.maskbor.cakemanager.dto;
+package com.maskbor.cakemanager.repository;
 
 import com.maskbor.cakemanager.model.Cake;
 import java.util.List;
@@ -8,14 +8,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author root
- */
-public class CakeDto implements CakeRepository{
-    public static final Logger logger = LoggerFactory.getLogger(CakeDto.class);
+@Repository(value = "CakeRepository")
+public class CakeRepositoryImpl implements CakeRepository{
+    public static final Logger logger = LoggerFactory.getLogger(CakeRepositoryImpl.class);
     
+    @Autowired
     private SessionFactory sessionFactory;
     
     public void setSessionFactory(SessionFactory sessionFactory){

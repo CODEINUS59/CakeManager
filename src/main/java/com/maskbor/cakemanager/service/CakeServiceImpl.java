@@ -1,45 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.maskbor.cakemanager.service;
 
-import com.maskbor.cakemanager.dto.CakeDto;
-import com.maskbor.cakemanager.dto.CakeFilter;
+import com.maskbor.cakemanager.repository.CakeRepositoryImpl;
+import com.maskbor.cakemanager.repository.CakeFilter;
+import com.maskbor.cakemanager.repository.CakeRepository;
+import com.maskbor.cakemanager.model.Cake;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author ran
- */
 @Service
 public class CakeServiceImpl implements CakeService{
 
+    @Autowired
+    private CakeRepository cakeDto;
+
+    public void setCakeDto(CakeRepositoryImpl cakeDto) {
+        this.cakeDto = cakeDto;
+    }
+    
     @Override
-    public CompletableFuture<CakeDto> getItem(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional(readOnly = true)
+    public CompletableFuture<CakeRepository> getItem(int id) {
+        return CompletableFuture.supplyAsync((Supplier<CakeRepository>)this.cakeDto.getItem(id));
     }
 
     @Override
-    public CompletableFuture<Void> saveItem(CakeDto cake) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional
+    public CompletableFuture<Void> saveItem(CakeRepository cake) {
+        
+        return CompletableFuture.runAsync((Runnable) this.cakeDto.addItem((Cake) cake));
     }
 
     @Override
-    public CompletableFuture<Void> updateItem(CakeDto cake) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional
+    public CompletableFuture<Void> updateItem(CakeRepository cake) {
+        return CompletableFuture.runAsync((Runnable) this.cakeDto.updateItem((Cake) cake));
     }
 
     @Override
-    public CompletableFuture<Void> removeItem(CakeDto cake) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Transactional
+    public CompletableFuture<Void> removeItem(CakeRepository cake) {
+        return CompletableFuture.runAsync((Runnable) this.cakeDto.removeItem((Cake) cake));
     }
 
     @Override
+    @Transactional
     public CompletableFuture<Long> getTotal(CakeFilter filter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return CompletableFuture.supplyAsync((Supplier<Long>)this.cakeDto.getTotal(filter));
     }
     
 }
