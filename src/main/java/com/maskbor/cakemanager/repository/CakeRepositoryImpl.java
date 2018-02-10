@@ -17,7 +17,7 @@ public class CakeRepositoryImpl implements CakeRepository{
     
     @Autowired
     private SessionFactory sessionFactory;
-    
+    @Autowired
     public void setSessionFactory(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
     }

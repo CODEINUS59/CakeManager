@@ -17,6 +17,7 @@ public class CakeController {
     @Autowired
     private CakeService cakeService;
 
+    @Autowired
     public void setCakeService(CakeService cakeService) {
         this.cakeService = cakeService;
     }

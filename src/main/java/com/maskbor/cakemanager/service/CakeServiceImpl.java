@@ -17,6 +17,7 @@ public class CakeServiceImpl implements CakeService{
     @Autowired
     private CakeRepository cakeDto;
 
+    @Autowired
     public void setCakeDto(CakeRepositoryImpl cakeDto) {
         this.cakeDto = cakeDto;
     }
